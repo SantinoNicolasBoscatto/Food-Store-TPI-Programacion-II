@@ -43,6 +43,6 @@ public abstract class CrudGenerico<T extends Base> implements CrudService<T> {
     }
 
     protected abstract void validarCreacion(T entidad);
-    protected void validarActualizacion(T existente, T nuevaInfo) {}
+    protected abstract void validarActualizacion(T existente, T nuevaInfo);
     protected abstract void aplicarCambios(T existente, T nuevaInfo);
 }

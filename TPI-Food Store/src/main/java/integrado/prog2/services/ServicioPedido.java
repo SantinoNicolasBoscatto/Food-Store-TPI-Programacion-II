@@ -62,7 +62,7 @@ public class ServicioPedido extends CrudGenerico<Pedido> {
             }
         } catch (RuntimeException e) {
             usuario.getPedidos().remove(pedido);
-            throw e;
+            throw new ValidacionException(e.getMessage());
         }
 
         super.crear(pedido);
