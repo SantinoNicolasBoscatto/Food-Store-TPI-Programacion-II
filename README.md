@@ -177,4 +177,4 @@ Ir a 4. Pedidos >
 **ENLACE**
 
 ## Documentacion
-**Documentos**
+El PDF se encuentra junto a este readme en GitHub
