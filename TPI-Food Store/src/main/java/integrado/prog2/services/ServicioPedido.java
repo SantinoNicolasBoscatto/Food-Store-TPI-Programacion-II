@@ -106,8 +106,6 @@ public class ServicioPedido extends CrudGenerico<Pedido> {
         return datos.stream().filter(p -> !p.isEliminado() && p.getUsuario() != null && p.getUsuario().getId().equals(idUsuario)).toList();
     }
     
-    /* Clase auxiliar para pasar los datos de cada detalle a crearPedidoCompleto. Permite validar todos los detalles antes de modificar las colecciones,
-       garantizando que el pedido se cree completo o no se cree nada. */
     public static class DetalleInfo {
         public final int cantidad;
         public final Producto producto;
