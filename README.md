@@ -44,46 +44,48 @@ Food Store es una aplicacion de consola que permite gestionar el catalogo de pro
 - **Arquitectura en capas** (entidades, servicios, UI, utilidades)
 
 ## Estructura del proyecto
+```text
 src/integrado/prog2/
 ├── Main.java
 ├── entities/
-│ ├── Base.java
-│ ├── Categoria.java
-│ ├── Producto.java
-│ ├── Usuario.java
-│ ├── Pedido.java
-│ └── DetallePedido.java
+│   ├── Base.java
+│   ├── Categoria.java
+│   ├── Producto.java
+│   ├── Usuario.java
+│   ├── Pedido.java
+│   └── DetallePedido.java
 ├── enums/
-│ ├── Rol.java
-│ ├── Estado.java
-│ └── FormaPago.java
+│   ├── Rol.java
+│   ├── Estado.java
+│   └── FormaPago.java
 ├── exceptions/
-│ ├── TextoInvalidoException.java
-│ ├── NumeroNegativoException.java
-│ ├── NumeroNoPositivoException.java
-│ ├── ValidacionException.java
-│ ├── EntidadNoEncontradaException.java
-│ └── MailDuplicadoException.java
+│   ├── TextoInvalidoException.java
+│   ├── NumeroNegativoException.java
+│   ├── NumeroNoPositivoException.java
+│   ├── ValidacionException.java
+│   ├── EntidadNoEncontradaException.java
+│   └── MailDuplicadoException.java
 ├── interfaces/
-│ ├── Calculable.java
-│ └── ValidableMail.java
+│   ├── Calculable.java
+│   └── ValidableMail.java
 ├── services/
-│ ├── Crud_Generico/
-│ │ ├── CrudService.java
-│ │ └── CrudGenerico.java
-│ ├── ServicioCategoria.java
-│ ├── ServicioProducto.java
-│ ├── ServicioUsuario.java
-│ └── ServicioPedido.java
+│   ├── Crud_Generico/
+│   │   ├── CrudService.java
+│   │   └── CrudGenerico.java
+│   ├── ServicioCategoria.java
+│   ├── ServicioProducto.java
+│   ├── ServicioUsuario.java
+│   └── ServicioPedido.java
 ├── ui/
-│ ├── Menu.java
-│ ├── MenuCategoria.java
-│ ├── MenuProducto.java
-│ ├── MenuUsuario.java
-│ └── MenuPedido.java
+│   ├── Menu.java
+│   ├── MenuCategoria.java
+│   ├── MenuProducto.java
+│   ├── MenuUsuario.java
+│   └── MenuPedido.java
 └── utils/
-├── Utilitario.java
-└── DataSeed.java
+    ├── Utilitario.java
+    └── DataSeed.java
+```
 
 ## Arquitectura en capas
 El proyecto separa responsabilidades en las siguientes capas:
