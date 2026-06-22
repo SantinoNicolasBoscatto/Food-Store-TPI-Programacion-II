@@ -108,7 +108,7 @@ git clone https://github.com/SantinoNicolasBoscatto/Food-Store-TPI-Programacion-
 
 2. Ingresar al directorio del proyecto:
 ```bash
-cd TPI-Food Store
+cd TPI-Food\ Store/
 ```
 
 3. Compilar desde la raiz del proyecto:
