@@ -176,7 +176,7 @@ Ir a 4. Pedidos >
 - Categoria con productos activos: no se puede eliminar
 
 ## Video
-https://youtu.be/Cs0ZBJbC5Gk
+https://youtu.be/smmQAfSCGOQ
 
 ## Documentacion
 El PDF se encuentra junto a este readme en GitHub
