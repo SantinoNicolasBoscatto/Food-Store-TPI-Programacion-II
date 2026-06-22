@@ -1,4 +1,5 @@
 integrado\prog2\interfaces\ValidableMail.class
+integrado\prog2\exceptions\StockInsuficienteException.class
 integrado\prog2\services\ServicioUsuario.class
 integrado\prog2\services\ServicioPedido$DetalleInfo.class
 integrado\prog2\services\Crud_Generico\CrudGenerico.class

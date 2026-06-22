@@ -1,6 +1,7 @@
 package integrado.prog2.entities;
 import integrado.prog2.enums.Estado;
 import integrado.prog2.enums.FormaPago;
+import integrado.prog2.exceptions.StockInsuficienteException;
 import integrado.prog2.interfaces.Calculable;
 import integrado.prog2.utils.Utilitario;
 import java.time.LocalDate;
@@ -56,11 +57,23 @@ public final class Pedido extends Base implements Calculable {
     }
 
     public void addDetallePedido(int cantidad, Producto producto) {
-        if (producto == null) throw new IllegalArgumentException("El producto no puede ser nul");      
+        if (producto == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo");
+        }
         Utilitario.validarPositivo(cantidad, "cantidad");
 
+        if (!producto.isDisponible()) 
+            throw new StockInsuficienteException("El producto " + producto.getNombre() + " no esta disponible");        
+        
+        if (cantidad > producto.getStock()) {
+            throw new StockInsuficienteException(
+                "Stock insuficiente para " + producto.getNombre() + ". Disponible: " + producto.getStock() + ", solicitado: " + cantidad
+            );
+        }
+        producto.setStock(producto.getStock() - cantidad);
+
         DetallePedido detalle = new DetallePedido(cantidad, producto);
-        detalle.asignarId();  
+        detalle.asignarId();
         this.detalles.add(detalle);
         calcularTotal();
     }

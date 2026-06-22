@@ -62,7 +62,7 @@ public class DataSeed {
         servicioPedido.crearPedidoCompleto(LocalDate.of(2026, 6, 9), Estado.TERMINADO, FormaPago.TRANSFERENCIA, enzo, detallesPedido3);
 
         List<DetalleInfo> detallesPedido4 = new ArrayList<>();
-        detallesPedido4.add(new DetalleInfo(1, heladoChocolate));
+        detallesPedido4.add(new DetalleInfo(1, flanCasero));
         servicioPedido.crearPedidoCompleto(LocalDate.of(2026, 6, 8), Estado.CANCELADO, FormaPago.TARJETA, santino, detallesPedido4);
     }
 }

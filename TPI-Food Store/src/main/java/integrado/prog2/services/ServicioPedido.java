@@ -9,6 +9,7 @@ import integrado.prog2.exceptions.EntidadNoEncontradaException;
 import integrado.prog2.exceptions.ValidacionException;
 import integrado.prog2.services.Crud_Generico.CrudGenerico;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 /* La historia dice que al crear un pedido con detalles, si ocurre una excepción al agregar un detalle se debe capturar el error y cancelar la creación del pedido
 en memoria para no dejar datos inconsistentes.
@@ -46,28 +47,38 @@ public class ServicioPedido extends CrudGenerico<Pedido> {
         validarTransicionEstado(existente.getEstado(), nuevaInfo.getEstado());
     }
     
-    public Pedido crearPedidoCompleto(LocalDate fecha, Estado estado, FormaPago formaPago, Usuario usuario, List<DetalleInfo> detalles) {
-        if (detalles == null || detalles.isEmpty()) throw new ValidacionException("El pedido debe tener al menos un detalle");
-        validarUsuarioExistente(usuario);
-        
-        for (DetalleInfo d : detalles) {
-            if (!servicioProducto.existeProductoActivo(d.producto.getId())) 
-                throw new EntidadNoEncontradaException("El producto con ID " + d.producto.getId() + " no existe o no esta disponible");         
-        }
+    public Pedido crearPedidoCompleto(LocalDate fecha, Estado estado, FormaPago formaPago, Usuario usuario, List<DetalleInfo> detalles) 
+    {
+      if (detalles == null || detalles.isEmpty()) throw new ValidacionException("El pedido debe tener al menos un detalle");
+      validarUsuarioExistente(usuario);
 
-        Pedido pedido = new Pedido(fecha, estado, formaPago, usuario);
-        try {
-            for (DetalleInfo d : detalles) {
-                pedido.addDetallePedido(d.cantidad, d.producto);
-            }
-        } catch (RuntimeException e) {
-            usuario.getPedidos().remove(pedido);
-            throw new ValidacionException(e.getMessage());
-        }
+      for (DetalleInfo d : detalles) {
+          if (!servicioProducto.existeProductoActivo(d.producto.getId())) {
+              throw new EntidadNoEncontradaException("El producto con ID " + d.producto.getId() + " no existe o no está disponible");
+          }
+      }
 
-        super.crear(pedido);
-        return pedido;
-    }
+      Pedido pedido = new Pedido(fecha, estado, formaPago, usuario);
+      List<DetallePedido> detallesAgregados = new ArrayList<>();
+      
+      try {
+          for (DetalleInfo d : detalles) {
+              pedido.addDetallePedido(d.cantidad, d.producto);          
+              detallesAgregados.add(pedido.getDetalles().get(pedido.getDetalles().size() - 1));
+          }
+      } 
+      catch (RuntimeException e) {     
+          for (DetallePedido detalle : detallesAgregados) {
+              Producto prod = detalle.getProducto();
+              prod.setStock(prod.getStock() + detalle.getCantidad());
+          }       
+          usuario.getPedidos().remove(pedido);
+          throw new ValidacionException("Error al crear el pedido: " + e.getMessage());
+      }
+
+      super.crear(pedido);
+      return pedido;
+  }
 
     public void agregarDetalle(Long idPedido, int cantidad, Producto producto) {
         Pedido pedido = buscarPorId(idPedido);
